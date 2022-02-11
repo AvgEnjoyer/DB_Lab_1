@@ -1,6 +1,12 @@
 ﻿// DB_Lab_1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 #include<stdio.h>
+#include"Structures.h"
+#include "Company.h"
+#include"Employee.h"
+#include "Input.h"
+#include"Output.h"
+
 
 int main()
 {
