@@ -3,7 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"Employee.h"
-#include"Company.h"
+int getCompany(Company* company, int id, char* error);
 int checkFileExsistence(FILE* indexTable, FILE* database, char* error)
 {
 	//db is not created yet
@@ -21,7 +21,7 @@ int checkIndexExistence(FILE* indexTable, char* error, int id)
 	fseek(indexTable, 0, SEEK_END);
 	long indexTableSize = ftell(indexTable);
 
-	if (indexTable == 0||id * sizeof(Indexer)>indexTableSize)
+	if (indexTable == 0||(id * sizeof(Indexer))>indexTableSize)
 	{
 		strcpy(error, "no ID in table");
 		return 0;

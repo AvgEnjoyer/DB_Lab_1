@@ -7,15 +7,16 @@
 void readCompany(Company* company)
 {
 	char name[20];
-	int status;
+	
 	name[0] = '\0';
 	printf("Enter company\'s name: ");
 	scanf("%s", name);
 
 	strcpy(company->name,name);
-	printf("Enter company\'s status: ");
-	scanf("%d", status);
-	company->status = status;
+	/*printf("Enter company\'s status: ");
+	int status;
+	scanf("%d", &status);
+	company->status = status;*/
 }
 void readEmployee(Employee* employee)
 {

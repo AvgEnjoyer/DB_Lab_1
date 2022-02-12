@@ -18,7 +18,7 @@ int main()
 		int choice;
 		int id;
 		char error[51];
-		printf("Choose option:\n0 - Quit\n1 - Insert Company\n2 - Get Company\n3 - Update company\n4 - Delete Company\n5 - Insert Employee\n 6 - Get Employee\n7 - Update Eployee\n8 - Delete Employee\n9- Get Info\n");
+		printf("Choose option:\n0 - Quit\n1 - Insert Company\n2 - Get Company\n3 - Update company\n4 - Delete Company\n5 - Insert Employee\n6 - Get Employee\n7 - Update Eployee\n8 - Delete Employee\n9- Get Info\n");
 		scanf("%d", &choice);
 		switch (choice)
 		{
@@ -44,9 +44,10 @@ int main()
 			printf("Enter ID: ");
 			scanf("%d", &id);
 			deleteCompany(id, error) ? printf("Deleted\n") : printf("Error: %s\n", error);
+			break;
 		case 5:
 			printf("Enter Company\'s ID: ");
-			scanf("%d", id);
+			scanf("%d", &id);
 			if (getCompany(&company, id, error))
 			{
 				employee.companyId = id;
@@ -130,7 +131,7 @@ int main()
 			break;
 		default:printf("Invalid input\n");
 		}
-		printf("——————————————————");
+		printf("=============================\n");
 
 		}
 		return 0;

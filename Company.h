@@ -7,7 +7,7 @@
 #include"Checks.h"
 #include"Employee.h"
 
-#define COMPANY_IND "master.ind"
+#define COMPANY_IND "company.ind"
 #define COMPANY_DATA "company.fl"
 #define COMPANY_GARBAGE "company_garbage.txt"
 #define INDEXER_SIZE sizeof(Indexer)
@@ -24,10 +24,10 @@ void overwriteGarbageId(int garbageCount, FILE* garbageZone, Company* record)
 	record->id = delIds[0];
 	fclose(garbageZone);
 	fopen(COMPANY_GARBAGE, "wb");//clear
-	fprintf(garbageZone, "%d", garbageCount - 1);//new garbage_ind count
+	fprintf(garbageZone, " %d", garbageCount - 1);//new garbage_ind count
 	for (int i = 1; i < garbageCount; i++)
 	{
-		fprintf(garbageZone, "%d", delIds[i]); //fill new garbage_ind
+		fprintf(garbageZone, " %d", delIds[i]); //fill new garbage_ind
 	}
 	free(delIds);//-mem
 	fclose(garbageZone);
@@ -38,7 +38,7 @@ void noteDeletedCompany(int id)
 {
 	FILE* garbageZone = fopen(COMPANY_GARBAGE, "rb");
 
-	int garbageCount;
+	int garbageCount=0;
 	fscanf(garbageZone, "%d", &garbageCount);
 	int* delIds = (int*)malloc(garbageCount * sizeof(int));//+mem
 	for (int i = 0; i < garbageCount; i++)
@@ -47,12 +47,12 @@ void noteDeletedCompany(int id)
 	}
 	fclose(garbageZone);
 	fopen(COMPANY_GARBAGE, "wb");//clear
-	fprintf(garbageZone, "%d", garbageCount + 1);
+	fprintf(garbageZone, " %d", garbageCount + 1);
 	for (int i = 0; i < garbageCount; i++)
 	{
-		fprintf(garbageZone, "%d", delIds[i]); //fill new garbage_ind
+		fprintf(garbageZone, " %d", delIds[i]); //fill new garbage_ind
 	}
-	fprintf(garbageZone, "%d", id);						// add garbage_ind
+	fprintf(garbageZone, " %d", id);						// add garbage_ind
 	free(delIds);											//-mem
 	fclose(garbageZone);
 }
@@ -67,7 +67,7 @@ int insertCompany(Company record)
 	FILE* garbageZone = fopen(COMPANY_GARBAGE, "rb");
 
 	struct Indexer indexer;
-	int garbageCount;
+	int garbageCount=0;
 	fscanf(garbageZone, "%d", &garbageCount);
 	if (garbageCount)
 	{

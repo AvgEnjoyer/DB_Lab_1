@@ -149,6 +149,15 @@
     <ClInclude Include="Output.h" />
     <ClInclude Include="Structures.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="company_garbage.txt" />
+    <Text Include="employee_garbage.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="company.fl" />
+    <None Include="company.ind" />
+    <None Include="employee.fl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

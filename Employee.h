@@ -9,7 +9,7 @@
 #define EMPLOYEE_DATA "employee.fl"
 #define EMPLOYEE_GARBAGE "employee_garbage.txt"
 #define EMPLOYEE_SIZE sizeof(Employee)
-
+int updateCompany(Company company, char* error);
 void reopenDatabase(FILE* database)
 {
 	fclose(database);
@@ -70,7 +70,7 @@ void overwriteGarbageAddress(int garbageCount, FILE* garbageZone, Employee* reco
 
 	fclose(garbageZone);								
 	fopen(EMPLOYEE_GARBAGE, "wb");							  
-	fprintf(garbageZone, "%d", garbageCount - 1);		
+	fprintf(garbageZone, " %d", garbageCount - 1);		
 
 	for (int i = 1; i < garbageCount; i++)
 	{
@@ -84,7 +84,7 @@ void noteDeletedEmployee(long address)
 {
 	FILE* garbageZone = fopen(EMPLOYEE_GARBAGE, "rb");		         
 
-	int garbageCount;
+	int garbageCount=0;
 	fscanf(garbageZone, "%d", &garbageCount);
 
 	long* delAddresses = (long*)malloc(garbageCount * sizeof(long)); 
@@ -96,7 +96,7 @@ void noteDeletedEmployee(long address)
 															         
 	fclose(garbageZone);								             
 	garbageZone = fopen(EMPLOYEE_GARBAGE, "wb");			         
-	fprintf(garbageZone, "%ld", garbageCount + 1);		             
+	fprintf(garbageZone, " %ld", garbageCount + 1);		             
 
 	for (int i = 0; i < garbageCount; i++)
 	{
@@ -114,7 +114,7 @@ int insertEmployee( Company company, Employee employee, char* error)
 	employee.exist = 1;
 	FILE* database = fopen(EMPLOYEE_DATA, "a+b");
 	FILE* garbageZone = fopen(EMPLOYEE_GARBAGE, "rb");
-	int garbbageCount;
+	int garbbageCount=0;
 	
 	fscanf(garbageZone, "%d", &garbbageCount);
 	if (garbbageCount)
@@ -139,6 +139,7 @@ int insertEmployee( Company company, Employee employee, char* error)
 	{
 		linkAdresses(database, company, employee);
 	}
+	fclose(database);
 	company.employeesCount++;
 	updateCompany(company, error);
 	return 1;
@@ -181,7 +182,7 @@ int updateEmployee(Employee employee, int productId)
 	return 1;
 }
 
-int deleteEmployee(Company company, Employee employee, int employeeId, char* error)
+void deleteEmployee(Company company, Employee employee, int employeeId, char* error)
 {
 	FILE* database = fopen(EMPLOYEE_DATA, "r+b");
 	Employee prev;

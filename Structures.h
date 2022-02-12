@@ -4,7 +4,7 @@ struct Company
 {
 	int id;
 	char name[20];
-	int status;
+	/*int status;*/
 	long firstEmployeeAddres;
 	int employeesCount;
 };

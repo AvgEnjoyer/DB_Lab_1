@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{f93a262b-0027-4681-b7f3-057807c980b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,5 +41,24 @@
     <ClInclude Include="Company.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="employee_garbage.txt">
+      <Filter>docs</Filter>
+    </Text>
+    <Text Include="company_garbage.txt">
+      <Filter>docs</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="company.fl">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="company.ind">
+      <Filter>docs</Filter>
+    </None>
+    <None Include="employee.fl">
+      <Filter>docs</Filter>
+    </None>
   </ItemGroup>
 </Project>
