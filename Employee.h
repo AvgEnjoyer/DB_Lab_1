@@ -10,14 +10,11 @@
 #define EMPLOYEE_GARBAGE "employee_garbage.txt"
 #define EMPLOYEE_SIZE sizeof(Employee)
 int updateCompany(Company company, char* error);
-void reopenDatabase(FILE* database)
-{
-	fclose(database);
-	database = fopen(EMPLOYEE_DATA,"r+b");
-}
+
 void linkAdresses(FILE* database, Company company, Employee employee)
 {
-	reopenDatabase(database);
+	fclose(database);
+	database = fopen(EMPLOYEE_DATA, "r+b");
 	Employee prev;
 	fseek(database, company.firstEmployeeAddres, SEEK_SET);
 	for (int i = 0; i < company.employeesCount; i++)
@@ -120,7 +117,8 @@ int insertEmployee( Company company, Employee employee, char* error)
 	if (garbbageCount)
 	{
 		overwriteGarbageAddress(garbbageCount, garbageZone, &employee);
-		reopenDatabase(database);								
+		fclose(database);
+		database = fopen(EMPLOYEE_DATA, "r+b");
 		fseek(database, employee.selfAddress, SEEK_SET);
 	}
 	else
