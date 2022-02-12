@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"Employee.h"
+#include"Company.h"
 int checkFileExsistence(FILE* indexTable, FILE* database, char* error)
 {
 	//db is not created yet
@@ -59,6 +60,7 @@ int checkKeyPairUniqueness(struct Company company, int employeeId)
 	return 1;
 }
 void info() {
+	
 	FILE* indexTable = fopen("company.ind", "rb");
 
 	if (indexTable == NULL)

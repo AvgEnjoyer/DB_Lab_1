@@ -8,7 +8,8 @@ void printCompany(Company company)
 	printf("Company's name: %s\n", company.name);
 	printf("Company's status: %d\n", company.status);
 }
-void printEmployee(Employee employee)
+void printEmployee(Employee employee, Company company)
 {
+	printf("Company: %s, %d scores\n", company.name, company.status);
 	printf("Employee's name: %s\n", employee.name);
 }

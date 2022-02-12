@@ -30,7 +30,7 @@ int main()
 		case 2:
 			printf("Company ID: ");
 			scanf("%d", &id);
-			getCompany(&company, id, error) ? printCompany(company) : printf("Error: %s\n", error);
+			getCompany(&company, id, error) ? printCompany(company) : (void)printf("Error: %s\n", error);
 			break;
 		case 3:
 			printf("Enter ID: ");
@@ -70,7 +70,7 @@ int main()
 			{
 				printf("Enter employee\'s ID: ");
 				scanf("%d", &id);
-				getEmployee(company, &employee, id, error) ? printEmployee(employee, company) : printf("Error: %s\n", error);
+				getEmployee(company, &employee, id, error) ? printEmployee(employee, company) : (void)printf("Error: %s\n", error);
 
 			}
 			else
@@ -89,7 +89,7 @@ int main()
 				if (getEmployee(company, &employee, id, error))
 				{
 					readEmployee(&employee);
-					updateEmployee(employee, id, error);
+					updateEmployee(employee, id);
 					printf("Updated\n");
 				}
 				else
@@ -111,7 +111,7 @@ int main()
 				scanf("%d", &id);
 				if (getEmployee(company, &employee, id, error))
 				{
-					deleteEmployee(&employee);
+					deleteEmployee(company,employee,id,error);
 					printf("Deleted\n");
 				}
 				else

@@ -1,4 +1,6 @@
 #pragma once
+#pragma warning(disable:4996)
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -11,9 +13,10 @@
 #define INDEXER_SIZE sizeof(Indexer)
 #define COMPANY_SIZE sizeof(Company)
 
+
 void overwriteGarbageId(int garbageCount, FILE* garbageZone, Company* record)
 {
-	int* delIds = (int*) malloc(garbageCount * sizeof(int)); //+mem
+	int* delIds = (int*)malloc(garbageCount * sizeof(int)); //+mem
 	for (int i = 0; i < garbageCount; i++)
 	{
 		fscanf(garbageZone, "%d", delIds + i);//mem filling
@@ -44,7 +47,7 @@ void noteDeletedCompany(int id)
 	}
 	fclose(garbageZone);
 	fopen(COMPANY_GARBAGE, "wb");//clear
-	fprintf(garbageZone, "%d", garbageCount +1);
+	fprintf(garbageZone, "%d", garbageCount + 1);
 	for (int i = 0; i < garbageCount; i++)
 	{
 		fprintf(garbageZone, "%d", delIds[i]); //fill new garbage_ind
@@ -87,8 +90,8 @@ int insertCompany(Company record)
 		if (ftell(indexTable))
 		{
 			fseek(indexTable, -indexerSize, SEEK_END);
-			fread(&indexer, INDEXER_SIZE, 1, indexTable); 
-			
+			fread(&indexer, INDEXER_SIZE, 1, indexTable);
+
 			record.id = indexer.id + 1;
 		}
 		else
@@ -101,14 +104,14 @@ int insertCompany(Company record)
 	record.employeesCount = 0;
 	fwrite(&record, COMPANY_SIZE, 1, database);
 	indexer.id = record.id;
-	indexer.addres = (record.id-1)*COMPANY_SIZE;
+	indexer.addres = (record.id - 1) * COMPANY_SIZE;
 	indexer.exists = 1;
 
 	printf("Company\'s id is %d\n", record.id);
 
 	fseek(indexTable, (record.id - 1) * INDEXER_SIZE, SEEK_SET);
-	fwrite(&indexer, INDEXER_SIZE, 1, indexTable);			
-	fclose(indexTable);									
+	fwrite(&indexer, INDEXER_SIZE, 1, indexTable);
+	fclose(indexTable);
 	fclose(database);
 
 	return 1;
@@ -124,27 +127,27 @@ int getCompany(Company* company, int id, char* error)
 		return 0;
 	}
 	Indexer indexer;
-	if (!checkIndexExistence(indexTable,error,id))
+	if (!checkIndexExistence(indexTable, error, id))
 	{
 		return 0;
 	}
-	fseek(indexTable,(id-1)*INDEXER_SIZE,SEEK_SET);
+	fseek(indexTable, (id - 1) * INDEXER_SIZE, SEEK_SET);
 	fread(&indexer, INDEXER_SIZE, 1, indexTable);
 
-	if(!checkRecordExistence(indexer,error))
+	if (!checkRecordExistence(indexer, error))
 	{
 		return 0;
 	}
-	fseek(database, indexer.addres, SEEK_SET);				
-	fread(company, sizeof(Company), 1, database);		
-	fclose(indexTable);										
+	fseek(database, indexer.addres, SEEK_SET);
+	fread(company, sizeof(Company), 1, database);
+	fclose(indexTable);
 	fclose(database);
 
 	return 1;
 }
 int updateCompany(Company company, char* error)
 {
-	FILE* indexTable = fopen(COMPANY_IND, "r+b");		
+	FILE* indexTable = fopen(COMPANY_IND, "r+b");
 	FILE* database = fopen(COMPANY_DATA, "r+b");
 
 	if (!checkFileExsistence(indexTable, database, error))
@@ -167,7 +170,7 @@ int updateCompany(Company company, char* error)
 	}
 	fseek(database, indexer.addres, SEEK_SET);
 	fwrite(&company, COMPANY_SIZE, 1, database);
-	fclose(indexTable);										
+	fclose(indexTable);
 	fclose(database);
 
 	return 1;
@@ -201,15 +204,15 @@ int deleteCompany(int id, char* error)
 
 	if (company.employeesCount)
 	{
-		FILE* employeeDb = fopen(EMPLOYEE_DATA,"r+b");
-		Employee employee;	
+		FILE* employeeDb = fopen(EMPLOYEE_DATA, "r+b");
+		Employee employee;
 		fseek(employeeDb, company.firstEmployeeAddres, SEEK_SET);
 		for (int i = 0; i < company.employeesCount; i++)
 		{
 			fread(&employee, EMPLOYEE_SIZE, 1, employeeDb);
 			fclose(employeeDb);
 			deleteEmployee(company, employee, employee.employeeId, error);
-			employeeDb=fopen(EMPLOYEE_DATA, "r+b");
+			employeeDb = fopen(EMPLOYEE_DATA, "r+b");
 			fseek(employeeDb, employee.nextAddress, SEEK_SET);
 		}
 		fclose(employeeDb);

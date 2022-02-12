@@ -20,9 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Company.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="Employee.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
@@ -36,6 +33,9 @@
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="Checks.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Company.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>
